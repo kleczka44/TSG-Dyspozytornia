@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>TSG v5</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f4f6;color:#111827;font-family:system-ui,-apple-system,sans-serif}
+header{background:#111827;color:#fff;padding:16px}
+.brand{font-size:22px;font-weight:900}.sub{font-size:12px;color:#cbd5e1}
+main{max-width:850px;margin:auto;padding:14px 14px 90px}
+.card{background:#fff;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0001}
+input,select,button{font:inherit;border-radius:11px;padding:11px;border:1px solid #d1d5db;width:100%;margin:5px 0 10px}
+button{background:#111827;color:#fff;border:0;font-weight:800}
+button:disabled{opacity:.5}
+.ghost{background:#e5e7eb;color:#111827}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pill{padding:5px 9px;border-radius:999px;background:#dcfce7;font-size:12px;font-weight:800}
+.err{background:#fee2e2;padding:10px;border-radius:10px}
+.ok{background:#dcfce7;padding:10px;border-radius:10px}
+.info{background:#e0f2fe;padding:10px;border-radius:10px}
+.small{font-size:12px;color:#6b7280}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:1px solid #e5e7eb;border-radius:14px;padding:14px}
+.tile b{display:block;margin-bottom:5px}
+.list{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #eee}
+.hidden{display:none!important}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:5px;padding:7px;z-index:10}
+.nav button{flex:1;font-size:12px;padding:9px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">⛏️ TSG</div>
+  <div class="sub">Dyspozytornia · v5</div>
+</header>
+
+<main>
+
+<section id="setup" class="card">
+  <h2>☁️ Jednorazowe połączenie z TSG</h2>
+  <p class="small">Wpisz dane publiczne projektu Supabase. Zostaną zapisane tylko na tym urządzeniu.</p>
+
+  <label>Project URL</label>
+  <input id="url" placeholder="https://xxxx.supabase.co">
+
+  <label>Public / anon key</label>
+  <input id="key" placeholder="sb_publishable_...">
+
+  <button onclick="saveConfig()">Zapisz połączenie</button>
+  <div id="setupMsg"></div>
+</section>
+
+<section id="login" class="card hidden">
+  <h2>🔐 Logowanie do TSG</h2>
+
+  <label>Dyspozytor</label>
+  <select id="person"></select>
+
+  <label>PIN</label>
+  <input id="pin" type="password" inputmode="numeric" maxlength="8" placeholder="Wpisz PIN">
+
+  <button onclick="login()">Zaloguj</button>
+  <div id="msg"></div>
+</section>
+
+<section id="app" class="hidden">
+
+  <div id="home" class="page">
+    <div class="card">
+      <div class="row">
+        <div>
+          <h2 style="margin:0 0 6px">TSG 👋</h2>
+          <span id="who" class="pill"></span>
+        </div>
+        <button class="ghost" style="width:auto" onclick="logout()">Wyloguj</button>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="tile"><b>📅 Mój grafik</b><span class="small">Najbliższe zmiany</span></div>
+      <div class="tile"><b>🗓️ Dyspozycyjność</b><span class="small">Ustaw dostępność</span></div>
+      <div class="tile"><b>🔄 Przekazanie</b><span class="small">Informacje ze zmiany</span></div>
+      <div class="tile"><b>📋 Zadania</b><span class="small">Zadania na zmianę</span></div>
+    </div>
+
+    <div id="adminBox" class="card hidden">
+      <h3>👑 Administracja</h3>
+      <p class="small">To konto ma uprawnienia administratora.</p>
+      <button onclick="showAdmin()">Otwórz panel ADMIN</button>
+    </div>
+  </div>
+
+  <div id="admin" class="page hidden">
+    <div class="card">
+      <div class="row">
+        <h2>👑 Administracja</h2>
+        <button class="ghost" style="width:auto" onclick="showHome()">←</button>
+      </div>
+
+      <div id="adminMsg" class="info">Ładowanie panelu ADMIN...</div>
+      <div id="people"></div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<div id="nav" class="nav hidden">
+  <button onclick="showHome()">🏠 Start</button>
+  <button id="adminNav" onclick="adminNavClick()">⚙️ Admin</button>
+</div>
+
+<script>
+let cfg=JSON.parse(localStorage.getItem('tsg_cfg')||'null');
+let me=null;
+
+function $(id){return document.getElementById(id)}
+
+function normalizeUrl(value){
+  return value.trim()
+    .replace(/\/+$/,'')
+    .replace(/\/rest\/v1$/i,'')
+    .replace(/\/rest$/i,'');
+}
+
+function headers(){
+  return {
+    'apikey':cfg.key,
+    'Authorization':'Bearer '+cfg.key,
+    'Content-Type':'application/json'
+  };
+}
+
+async function rpc(fn,body){
+  if(!cfg || !cfg.url || !cfg.key) throw new Error('Brak konfiguracji Supabase.');
+  const r=await fetch(cfg.url+'/rest/v1/rpc/'+fn,{
+    method:'POST',
+    headers:headers(),
+    body:JSON.stringify(body)
+  });
+  const t=await r.text();
+  if(!r.ok) throw new Error(t||('HTTP '+r.status));
+  return t?JSON.parse(t):null;
+}
+
+function saveConfig(){
+  const url=normalizeUrl($('url').value);
+  const key=$('key').value.trim();
+
+  if(!url||!key){
+    $('setupMsg').innerHTML='<div class="err">Wpisz oba pola.</div>';
+    return;
+  }
+
+  cfg={url:url,key:key};
+  localStorage.setItem('tsg_cfg',JSON.stringify(cfg));
+
+  $('setupMsg').innerHTML='<div class="ok">✅ Połączenie zapisane.</div>';
+  setTimeout(showLogin,250);
+}
+
+function showLogin(){
+  $('setup').classList.add('hidden');
+  $('login').classList.remove('hidden');
+  $('app').classList.add('hidden');
+  $('nav').classList.add('hidden');
+
+  $('person').innerHTML=[
+    'Marcel Kleczka',
+    'Dyspozytor 2',
+    'Dyspozytor 3',
+    'Dyspozytor 4',
+    'Dyspozytor 5'
+  ].map(x=>'<option>'+x+'</option>').join('');
+}
+
+async function login(){
+  $('msg').innerHTML='';
+
+  if(!cfg){
+    $('msg').innerHTML='<div class="err">Brak konfiguracji Supabase.</div>';
+    return;
+  }
+
+  try{
+    const r=await rpc('tsg_login',{
+      p_imie_nazwa:$('person').value,
+      p_pin:$('pin').value
+    });
+
+    if(!r||!r.length){
+      $('msg').innerHTML='<div class="err">❌ Nieprawidłowy PIN lub konto nieaktywne.</div>';
+      return;
+    }
+
+    me=r[0];
+
+    $('login').classList.add('hidden');
+    $('app').classList.remove('hidden');
+    $('nav').classList.remove('hidden');
+
+    $('who').textContent=me.imie_nazwa+(me.admin?' · ADMIN':'');
+    $('adminBox').classList.toggle('hidden',!me.admin);
+
+    showHome();
+
+  }catch(e){
+    $('msg').innerHTML='<div class="err">❌ Błąd połączenia z Supabase.<br><span class="small">'+escapeHtml(e.message)+'</span></div>';
+  }
+}
+
+function adminNavClick(){
+  if(!me){
+    $('msg').innerHTML='<div class="info">ℹ️ Najpierw zaloguj się do TSG.</div>';
+    return;
+  }
+
+  if(!me.admin){
+    alert('Brak uprawnień administratora.');
+    return;
+  }
+
+  showAdmin();
+}
+
+function showHome(){
+  $('home').classList.remove('hidden');
+  $('admin').classList.add('hidden');
+}
+
+async function showAdmin(){
+  if(!me){
+    alert('Najpierw zaloguj się.');
+    return;
+  }
+
+  if(!me.admin){
+    alert('Brak uprawnień administratora.');
+    return;
+  }
+
+  $('home').classList.add('hidden');
+  $('admin').classList.remove('hidden');
+  $('adminMsg').className='info';
+  $('adminMsg').textContent='Ładowanie panelu ADMIN...';
+  $('people').innerHTML='';
+
+  try{
+    const r=await fetch(
+      cfg.url+'/rest/v1/dyspozytorzy?select=id,imie_nazwa,admin,aktywny&order=id',
+      {headers:headers()}
+    );
+
+    const text=await r.text();
+
+    if(!r.ok){
+      throw new Error(text||('HTTP '+r.status));
+    }
+
+    const rows=JSON.parse(text);
+
+    $('adminMsg').className='ok';
+    $('adminMsg').textContent='✅ Panel ADMIN działa.';
+
+    $('people').innerHTML=rows.map(x=>
+      '<div class="list">'+
+      '<span>'+escapeHtml(x.imie_nazwa)+'</span>'+
+      '<b>'+(x.admin?'👑 ADMIN':(x.aktywny?'🟢 Aktywny':'🔴 Nieaktywny'))+'</b>'+
+      '</div>'
+    ).join('');
+
+  }catch(e){
+    $('adminMsg').className='err';
+    $('adminMsg').innerHTML=
+      '⚠️ Panel ADMIN został otwarty, ale nie udało się pobrać listy dyspozytorów.<br>'+
+      '<span class="small">'+escapeHtml(e.message)+'</span>';
+  }
+}
+
+function logout(){
+  me=null;
+  $('app').classList.add('hidden');
+  $('nav').classList.add('hidden');
+  $('adminBox').classList.add('hidden');
+  $('pin').value='';
+  $('msg').innerHTML='';
+  showLogin();
+}
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+if(cfg){
+  $('url').value=cfg.url;
+  $('key').value=cfg.key;
+  showLogin();
+}else{
+  $('setup').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
