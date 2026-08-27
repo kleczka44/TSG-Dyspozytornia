@@ -1,0 +1,249 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111827"><title>TSG v18</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:system-ui,-apple-system,sans-serif}header{background:#111827;color:#fff;padding:16px}.brand{font-size:22px;font-weight:900}.sub{font-size:12px;color:#cbd5e1}main{max-width:920px;margin:auto;padding:14px 14px 92px}.card{background:#fff;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0001}input,select,button{font:inherit;border-radius:11px;padding:11px;border:1px solid #d1d5db;width:100%;margin:5px 0 10px}button{background:#111827;color:#fff;border:0;font-weight:800;cursor:pointer}button.ghost{background:#e5e7eb;color:#111827}button:disabled{opacity:.5;cursor:not-allowed}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{border:1px solid #e5e7eb;border-radius:14px;padding:14px;cursor:pointer;background:#fff}.tile b{display:block;margin-bottom:5px}.small{font-size:12px;color:#6b7280}.list{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #eee;gap:10px}.hidden{display:none!important}.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:5px;padding:7px;z-index:20}.nav button{flex:1;font-size:12px;padding:9px;margin:0}.pageTitle{margin:0}.shift{border:1px solid #e5e7eb;border-radius:15px;padding:13px;margin:9px 0;background:#fff}.shiftTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.date{font-size:16px;font-weight:900}.time{font-size:14px;font-weight:800}.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;font-size:11px;font-weight:800}.empty{text-align:center;padding:25px 10px;color:#6b7280}.loading{padding:18px;text-align:center;color:#6b7280}.err{background:#fee2e2;padding:11px;border-radius:11px;margin-top:8px}.ok{background:#dcfce7;padding:11px;border-radius:11px;margin-top:8px}.info{background:#dbeafe;padding:12px;border-radius:12px;margin-top:8px}.warn{background:#fef3c7;padding:12px;border-radius:12px;margin-top:8px}hr{border:0;border-top:1px solid #eee;margin:14px 0}.monthNav,.weekNav{display:flex;gap:8px;align-items:center}.monthNav button,.weekNav button{width:auto;margin:0;padding:8px 12px}.weekLabel{flex:1;text-align:center;font-weight:900}.generatorHead{display:grid;grid-template-columns:1fr 1fr;gap:10px}.progressRow{display:flex;gap:8px;align-items:center;margin:10px 0}.progressTrack{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden;flex:1}.progressBar{height:100%;background:#111827;width:0;transition:width .2s}.weekCard{border:1px solid #dbe1e8;border-radius:16px;overflow:hidden;background:#fafafa;margin-top:12px}.weekHead{padding:13px 14px;background:#f3f4f6;text-align:center;font-weight:900}.weekHead small{display:block;color:#6b7280;font-weight:600;margin-top:3px}.workBlock{background:#fff}.shiftRow{display:grid;grid-template-columns:145px 1fr;gap:12px;padding:13px;border-top:1px solid #e5e7eb;align-items:start}.shiftMeta b{display:block;font-size:14px}.shiftMeta span{font-size:12px;color:#6b7280}.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}.slot{position:relative}.slot label{display:block;font-size:10px;color:#6b7280;font-weight:800;margin:0 0 2px 2px}.slot select{margin:0;background:#fff}.slot select.assigned{border:2px solid #111827;font-weight:800}.weekendTitle{padding:12px 14px;background:#f8fafc;border-top:1px solid #e5e7eb;font-weight:900}.dayMini{font-size:11px;color:#6b7280;margin-left:5px}.summary{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.crewPill{background:#111827;color:#fff;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}.crewPill.emptyPill{background:#e5e7eb;color:#6b7280}.calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.calHead{font-size:10px;font-weight:900;text-align:center;color:#6b7280;padding:5px}.calDay{border:1px solid #e5e7eb;border-radius:10px;min-height:88px;padding:6px;background:#fafafa}.calNum{font-weight:900;font-size:11px;margin-bottom:5px}.calShift{font-size:9px;border-top:1px solid #eee;padding-top:3px;margin-top:3px}.calShift b{font-size:9px}.pill{display:inline-block;background:#eef2ff;border-radius:999px;padding:3px 6px;font-size:9px;font-weight:800;margin:2px 2px 0 0}.saveSticky{position:sticky;bottom:60px;background:#fff;padding-top:8px;z-index:5}.statusLine{font-size:12px;color:#4b5563;margin-top:5px}@media(max-width:600px){.grid2,.generatorHead{grid-template-columns:1fr}.shiftRow{grid-template-columns:1fr;gap:7px}.slots{grid-template-columns:1fr 1fr}.calendarGrid{gap:3px}.calDay{min-height:74px;padding:4px}.calShift{font-size:8px}}@media(max-width:430px){.slots{grid-template-columns:1fr}.slot select{font-size:14px}}
+
+.paperWrap{margin-top:10px;overflow:visible}
+.paper{min-width:0;border:1.5px solid #1f2937;border-radius:8px;background:#fff;color:#111827;overflow:hidden}
+.paperTop{padding:13px 14px 10px;border-bottom:1px solid #cbd5e1;background:#fff}
+.paperTopLine{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.paperName{font-size:18px;font-weight:900;line-height:1.1}.paperVersion{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;background:#eef2f7;font-size:11px;vertical-align:middle}.paperSub{margin-top:4px;font-size:12px;color:#6b7280}
+.paperActions{display:flex;gap:6px}.paperActions button{width:auto;margin:0;padding:8px 10px;background:#f1f5f9;color:#111827;border:1px solid #dbe2ea}
+.paperTitle{text-align:center;font-weight:900;font-size:15px;padding:10px;border:1px solid #d1d5db;background:#f8fafc;margin:10px}
+.paper table{width:calc(100% - 20px);margin:0 10px 10px;border-collapse:collapse;table-layout:fixed}
+.paper th,.paper td{border:1px solid #374151;padding:7px 6px;vertical-align:middle}
+.paper th{background:#f3f4f6;text-align:center;font-size:10px;font-weight:900}.paper th.subhead{background:#fafafa;font-size:9px}
+.paper .weekNo{width:86px;text-align:center;font-weight:900}.paper .shiftNo{width:62px;text-align:center;font-weight:900}.paper .workCol{width:40%}.paper .weekendCol{width:17%}
+.paper .weekDate{font-size:10px;color:#6b7280;font-weight:700;display:block;margin-top:3px}.paper .names{font-weight:800;line-height:1.4;font-size:12px}.paper .name2{font-weight:800}.paper .emptyCell{color:#9ca3af;text-align:center}.paper .weekGroup{background:#fff;text-align:center}.paper .weekGroup strong{display:block;font-size:11px}.paper .weekGroup span{display:block;color:#6b7280;font-size:10px;margin-top:3px}.paper .weekendName{font-size:11px;font-weight:800}.paper .note{display:block;margin-top:3px;font-size:9px;color:#2563eb;font-style:italic}.paperFoot{font-size:10px;color:#4b5563;padding:0 12px 12px}.paperLegend{border-top:1px solid #d1d5db;padding:8px 12px;font-size:10px;color:#4b5563;background:#fafafa}
+@media(max-width:700px){.paper{min-width:0}.paperTitle{font-size:13px;margin:8px}.paper table{width:calc(100% - 16px);margin:0 8px 8px}.paper th,.paper td{padding:6px 4px}.paper .weekNo{width:78px}.paper .shiftNo{width:52px}.paper .names{font-size:11px}}
+
+</style></head><body><header><div class="brand">⛏️ TSG</div><div class="sub">Dyspozytornia · v18</div></header><main>
+<section id="setup" class="card hidden"><h2>☁️ Połączenie z TSG</h2><p class="small">Dane Supabase są zapisywane tylko na tym urządzeniu.</p><label>Project URL</label><input id="url" placeholder="https://xxxx.supabase.co"><label>Public / anon key</label><input id="key" placeholder="sb_publishable_..."><button onclick="saveConfig()">Zapisz połączenie</button><div id="setupMsg"></div></section>
+<section id="login" class="card hidden"><h2>🔐 Logowanie do TSG</h2><label>Dyspozytor</label><select id="person"></select><label>PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="8" placeholder="Wpisz PIN" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">Zaloguj</button><div id="msg"></div></section>
+<section id="app" class="hidden"><div id="home" class="page"><div class="card"><div class="row"><div><h2 style="margin:0 0 6px">TSG 👋</h2><span id="who" class="badge"></span></div><button class="ghost" style="width:auto;margin:0" onclick="logout()">Wyloguj</button></div></div><div class="grid2"><div class="tile" onclick="showSchedule()"><b>📅 Mój grafik</b><span class="small">Moje przypisane zmiany</span></div><div class="tile" onclick="showAvailability()"><b>🗓️ Dyspozycyjność</b><span class="small">Dostępność do pracy</span></div><div class="tile" onclick="showHandover()"><b>🔄 Przekazanie</b><span class="small">Informacje ze zmiany</span></div><div class="tile" onclick="showTasks()"><b>📋 Zadania</b><span class="small">Zadania na zmianę</span></div></div><div id="adminBox" class="card hidden"><h3>👑 Administracja</h3><p class="small">Konto administratora.</p><button onclick="showAdmin()">Otwórz panel ADMIN</button></div></div>
+<div id="schedule" class="page hidden"><div class="card"><div class="row"><h2 class="pageTitle">📅 Mój grafik</h2><button class="ghost" style="width:auto;margin:0" onclick="showHome()">←</button></div><hr><div class="monthNav"><button class="ghost" onclick="changeMonth(-1)">‹</button><div id="monthLabel" style="font-weight:900;flex:1;text-align:center"></div><button class="ghost" onclick="changeMonth(1)">›</button></div></div><div id="scheduleList" class="card"></div></div>
+<div id="availability" class="page hidden"><div class="card"><div class="row"><h2 class="pageTitle">🗓️ Dyspozycyjność</h2><button class="ghost" style="width:auto;margin:0" onclick="showHome()">←</button></div><hr><div class="info"><b>Moduł przygotowany.</b><br><span class="small">Formularz dostępności dodamy w kolejnym kroku.</span></div></div></div>
+<div id="handover" class="page hidden"><div class="card"><div class="row"><h2 class="pageTitle">🔄 Przekazanie</h2><button class="ghost" style="width:auto;margin:0" onclick="showHome()">←</button></div><hr><div class="info"><b>Moduł przygotowany.</b><br><span class="small">Przekazanie informacji dodamy w kolejnym kroku.</span></div></div></div>
+<div id="tasks" class="page hidden"><div class="card"><div class="row"><h2 class="pageTitle">📋 Zadania</h2><button class="ghost" style="width:auto;margin:0" onclick="showHome()">←</button></div><hr><div class="info"><b>Moduł przygotowany.</b><br><span class="small">Zadania na zmianę dodamy w kolejnym kroku.</span></div></div></div>
+<div id="admin" class="page hidden"><div class="card"><div class="row"><h2 class="pageTitle">👑 Administracja</h2><button class="ghost" style="width:auto;margin:0" onclick="showHome()">←</button></div><div id="adminMsg"></div><div id="people"></div></div><div class="card"><h3>📅 Utwórz grafik</h3><p class="small">Dni robocze: 06–14, 14–22, 22–06. Sobota i niedziela: 06–18, 18–06.</p><div class="generatorHead"><div><label>Rok</label><input id="genYear" type="number" min="2026" max="2100"></div><div><label>Miesiąc</label><select id="genMonth"></select></div></div><label>Nazwa grafiku</label><input id="genName" placeholder="np. Grafik wrzesień 2026"><button onclick="generatePreview()">⚙️ Wygeneruj podgląd</button><div id="genMsg"></div></div><div id="previewCard" class="card hidden">
+  <div class="row"><div><h3 style="margin:0">🗓️ Grafik tygodniowy</h3><div id="weekStatus" class="statusLine"></div></div><span id="previewCount" class="badge"></span></div>
+  <div class="weekNav"><button class="ghost" onclick="changeDraftWeek(-1)">‹</button><div id="draftWeekLabel" class="weekLabel"></div><button class="ghost" onclick="changeDraftWeek(1)">›</button></div>
+  <div class="info"><b>Obsada tygodnia</b><br><span class="small">W dni robocze ustawiasz obsadę tylko raz na cały tydzień. Na każdej zmianie są maksymalnie 2 miejsca. Osoba zajęta na innej zmianie jest automatycznie usuwana z listy wyboru. Weekend ustawiamy osobno.</span></div>
+  <div class="progressRow"><span class="small">Uzupełnienie</span><div class="progressTrack"><div id="progressBar" class="progressBar"></div></div><b id="progressText" class="small">0%</b></div>
+  <div id="preview"></div>
+  <div class="saveSticky"><button class="fullBtn" id="saveGrafikBtn" onclick="saveGrafik()">💾 Zapisz cały grafik w Supabase</button><div id="saveMsg"></div></div>
+</div>
+</div>
+<div class="card"><h3>📚 Istniejące grafiki</h3><div id="adminGrafiki"><div class="loading">Ładowanie…</div></div></div><div id="adminGrafikView" class="card hidden"></div></div></section></main>
+<div id="nav" class="nav hidden"><button onclick="showHome()">🏠 Start</button><button onclick="showSchedule()">📅 Grafik</button><button onclick="showAdmin()">⚙️ Admin</button></div>
+<script>
+let currentGrafikName='',currentGrafikYear=0,currentGrafikMonth=0,currentGrafikStatus='roboczy';
+let cfg={url:'https://kyhksumzecavrynbvnqn.supabase.co',key:'sb_publishable_68nW0JjJJZlfNOPrPrGjnQ_QzTyoPpJ'},me=null,currentMonth=new Date();currentMonth.setDate(1);let dispatchers=[],draftPositions=[];const months=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],weekdays=['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
+function $(id){return document.getElementById(id)}function headers(){return {'apikey':cfg.key,'Authorization':'Bearer '+cfg.key,'Content-Type':'application/json'}}async function rpc(fn,body){const r=await fetch(cfg.url+'/rest/v1/rpc/'+fn,{method:'POST',headers:headers(),body:JSON.stringify(body)});const t=await r.text();if(!r.ok)throw new Error(t||r.status);return t?JSON.parse(t):null}async function get(path){const r=await fetch(cfg.url+'/rest/v1/'+path,{headers:headers()});const t=await r.text();if(!r.ok)throw new Error(t||r.status);return t?JSON.parse(t):[]}
+function escapeHtml(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}function saveConfig(){const url=$('url').value.trim().replace(/\/$/,''),key=$('key').value.trim();if(!url||!key){$('setupMsg').innerHTML='<div class="err">Wpisz oba pola.</div>';return}cfg={url,key};localStorage.setItem('tsg_cfg',JSON.stringify(cfg));showLogin()}function showLogin(){$('setup').classList.add('hidden');$('login').classList.remove('hidden');$('person').innerHTML=['Marcel Kleczka','Dyspozytor 2','Dyspozytor 3','Dyspozytor 4','Dyspozytor 5'].map(x=>'<option>'+x+'</option>').join('')}
+async function login(){$('msg').innerHTML='<div class="info">Logowanie…</div>';try{const r=await rpc('tsg_login',{p_imie_nazwa:$('person').value,p_pin:$('pin').value});if(!r||!r.length){$('msg').innerHTML='<div class="err">❌ Nieprawidłowy PIN lub konto nieaktywne.</div>';return}me=r[0];$('login').classList.add('hidden');$('app').classList.remove('hidden');$('nav').classList.remove('hidden');$('who').textContent=me.imie_nazwa+(me.admin?' · ADMIN':'');$('adminBox').classList.toggle('hidden',!me.admin);showHome()}catch(e){$('msg').innerHTML='<div class="err">❌ Błąd połączenia z Supabase.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}}
+function hidePages(){['home','schedule','availability','handover','tasks','admin'].forEach(id=>$(id).classList.add('hidden'))}function showHome(){hidePages();$('home').classList.remove('hidden')}function showAvailability(){hidePages();$('availability').classList.remove('hidden')}function showHandover(){hidePages();$('handover').classList.remove('hidden')}function showTasks(){hidePages();$('tasks').classList.remove('hidden')}async function showSchedule(){if(!me)return;hidePages();$('schedule').classList.remove('hidden');renderMonthLabel();await loadMySchedule()}function renderMonthLabel(){$('monthLabel').textContent=months[currentMonth.getMonth()]+' '+currentMonth.getFullYear()}function changeMonth(delta){currentMonth.setMonth(currentMonth.getMonth()+delta);renderMonthLabel();loadMySchedule()}function formatDate(v){const d=new Date(v+'T00:00:00');return d.toLocaleDateString('pl-PL',{weekday:'short',day:'2-digit',month:'2-digit'})}function formatTime(v){return String(v||'').slice(0,5)}
+async function loadMySchedule(){$('scheduleList').innerHTML='<div class="loading">Ładowanie grafiku…</div>';const y=currentMonth.getFullYear(),m=currentMonth.getMonth()+1,start=y+'-'+String(m).padStart(2,'0')+'-01',end=y+'-'+String(m).padStart(2,'0')+'-'+String(new Date(y,m,0).getDate()).padStart(2,'0');try{const grafiki=await get('grafiki?select=id,rok,miesiac,nazwa,status&rok=eq.'+y+'&miesiac=eq.'+m);if(!grafiki.length){$('scheduleList').innerHTML='<div class="empty">Brak grafiku na ten miesiąc.</div>';return}const ids=grafiki.map(g=>g.id),positions=await get('grafik_pozycje?select=id,grafik_id,data,godzina_od,godzina_do,typ,uwagi&grafik_id=in.('+ids.join(',')+')&data=gte.'+start+'&data=lte.'+end+'&order=data.asc,godzina_od.asc');if(!positions.length){$('scheduleList').innerHTML='<div class="empty">Grafik istnieje, ale nie ma jeszcze zmian.</div>';return}const pids=positions.map(p=>p.id),obs=await get('grafik_obsada?select=id,pozycja_id,dyspozytor_id,zrodlo&pozycja_id=in.('+pids.join(',')+')'),mine=positions.filter(p=>obs.some(o=>Number(o.pozycja_id)===Number(p.id)&&Number(o.dyspozytor_id)===Number(me.id)));if(!mine.length){$('scheduleList').innerHTML='<div class="empty">Nie masz przypisanej zmiany w tym miesiącu.</div>';return}$('scheduleList').innerHTML=mine.map(p=>'<div class="shift"><div class="shiftTop"><div class="date">'+formatDate(p.data)+'</div><span class="badge">'+escapeHtml(p.typ||'Zmiana')+'</span></div><div class="time">🕐 '+formatTime(p.godzina_od)+' – '+formatTime(p.godzina_do)+'</div>'+(p.uwagi?'<div class="small">📝 '+escapeHtml(p.uwagi)+'</div>':'')+'</div>').join('')}catch(e){$('scheduleList').innerHTML='<div class="err">❌ Nie udało się pobrać grafiku.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}}
+async function showAdmin(){if(!me||!me.admin){if(me)alert('Brak uprawnień administratora.');return}hidePages();$('admin').classList.remove('hidden');await loadAdminPeople();await loadAdminGrafiki();initGenerator()}async function loadAdminPeople(){$('people').innerHTML='<div class="loading">Ładowanie dyspozytorów…</div>';try{const rows=await get('dyspozytorzy?select=id,imie_nazwa,admin,aktywny&order=id');dispatchers=rows.filter(x=>x.aktywny);$('people').innerHTML=rows.length?rows.map(x=>'<div class="list"><span>'+escapeHtml(x.imie_nazwa)+'</span><b>'+(x.admin?'👑 ADMIN':(x.aktywny?'🟢 Aktywny':'🔴 Nieaktywny'))+'</b></div>').join(''):'<div class="empty">Brak dyspozytorów.</div>'}catch(e){$('people').innerHTML='<div class="err">Nie udało się pobrać listy dyspozytorów.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}}async function loadAdminGrafiki(){
+  $('adminGrafiki').innerHTML='<div class="loading">Ładowanie…</div>';
+  try{
+    let rows=[];
+    try{ rows=await rpc('tsg_admin_grafiki',{}); }catch(_){ rows=await get('grafiki?select=id,rok,miesiac,nazwa,status&order=rok.desc,miesiac.desc'); }
+    rows=Array.isArray(rows)?rows:[];
+    $('adminGrafiki').innerHTML=rows.length?rows.map(g=>
+      '<div class="list"><span><b>'+escapeHtml(g.nazwa||('Grafik '+g.miesiac+'/'+g.rok))+'</b><div class="small">'+g.miesiac+'/'+g.rok+' · ID '+Number(g.id)+'</div></span>'+      '<div style="display:flex;align-items:center;gap:6px"><span class="badge">'+escapeHtml(g.status||'aktywny')+'</span><button class="ghost" style="width:auto;margin:0;padding:7px 9px" onclick="viewGrafik('+Number(g.id)+')">👁️</button><button class="ghost" style="width:auto;margin:0;padding:7px 9px" onclick="editGrafik('+Number(g.id)+')">✏️</button></div></div>'
+    ).join(''):'<div class="empty">Brak utworzonych grafików.</div>';
+  }catch(e){$('adminGrafiki').innerHTML='<div class="err">Nie udało się pobrać grafików.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}
+}
+async function fetchGrafikBundle(grafikId){
+  try{return await rpc('tsg_admin_grafik_bundle',{p_grafik_id:Number(grafikId)});}catch(_){
+    const gs=await get('grafiki?select=id,rok,miesiac,nazwa,status&id=eq.'+grafikId); if(!gs.length)throw new Error('Nie znaleziono grafiku.');
+    const positions=await get('grafik_pozycje?select=id,data,godzina_od,godzina_do,typ,uwagi&grafik_id=eq.'+grafikId+'&order=data.asc,godzina_od.asc');
+    let obs=[];if(positions.length){const ids=positions.map(p=>p.id);obs=await get('grafik_obsada?select=pozycja_id,dyspozytor_id&pozycja_id=in.('+ids.join(',')+')');}
+    return {grafik:gs[0],positions,obsada:obs};
+  }
+}
+function personNameById(id,names){return names[Number(id)]||('ID '+id)}
+function namesForPosition(p,obs,names){
+  return obs.filter(o=>Number(o.pozycja_id)===Number(p.id)).map(o=>personNameById(o.dyspozytor_id,names));
+}
+function weekMondayFromDate(v){return mondayOf(new Date(v+'T00:00:00'))}
+function weekKeyForDate(v){return isoDate(weekMondayFromDate(v))}
+function shortDateOnly(d){return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')}
+function renderPaperSchedule(g,positions,obs){
+  const names={};dispatchers.forEach(d=>names[Number(d.id)]=d.imie_nazwa);
+  const byWeek={};(positions||[]).forEach(p=>{const k=weekKeyForDate(p.data);(byWeek[k]??=[]).push(p)});
+  const weeks=Object.keys(byWeek).sort();
+  let html='<div class="paperWrap"><div class="paper">';
+  html+='<div class="paperTop"><div class="paperTopLine"><div><div class="paperName">📅 '+escapeHtml(g.nazwa||('Grafik '+g.miesiac+'/'+g.rok))+' <span class="paperVersion">v18</span></div><div class="paperSub">'+months[g.miesiac-1]+' '+g.rok+' · '+escapeHtml(g.status||'roboczy')+'</div></div><div class="paperActions"><button onclick="editGrafik('+Number(g.id)+')">✏️</button><button onclick="$(\'adminGrafikView\').classList.add(\'hidden\')">✕</button></div></div></div>';
+  html+='<div class="paperTitle">OBŁOŻENIE STACJI GŁÓWNEJ – '+months[g.miesiac-1].toUpperCase()+' '+g.rok+'</div>';
+  html+='<table><thead><tr><th rowspan="2" class="weekNo">TYDZIEŃ</th><th rowspan="2" class="shiftNo">ZMIANA</th><th rowspan="2" class="workCol">DNI ROBOCZE<br><span class="weekDate">Poniedziałek – Piątek</span></th><th colspan="2">WEEKEND</th></tr><tr><th class="subhead weekendCol">Sobota<br><span class="weekDate">'+shortDateOnly(sat)+'</span></th><th class="subhead weekendCol">Niedziela<br><span class="weekDate">'+shortDateOnly(sun)+'</span></th></tr></thead><tbody>';
+  weeks.forEach((w,wi)=>{
+    const monday=new Date(w+'T00:00:00'), days=weekDates(monday), fri=days[4], sat=days[5], sun=days[6];
+    const weekRows=byWeek[w]||[];
+    const work={1:[],2:[],3:[]};
+    weekRows.forEach(p=>{const d=new Date(p.data+'T00:00:00').getDay();if(d>=1&&d<=5){const n=String(p.shift_no||String(p.typ||'').replace('Zmiana ',''));if(work[n])work[n].push(p)}});
+    const satRows=weekRows.filter(p=>p.data===isoDate(sat)),sunRows=weekRows.filter(p=>p.data===isoDate(sun));
+    const satByShift={1:satRows.find(p=>String(p.shift_no)==='1'),2:satRows.find(p=>String(p.shift_no)==='2')};
+    const sunByShift={1:sunRows.find(p=>String(p.shift_no)==='1'),2:sunRows.find(p=>String(p.shift_no)==='2')};
+    [1,2,3].forEach((shift,row)=>{
+      const workNames=[...new Set(work[shift].flatMap(p=>namesForPosition(p,obs,names)))];
+      const satP=satByShift[shift],sunP=sunByShift[shift];
+      const satNames=satP?namesForPosition(satP,obs,names):[],sunNames=sunP?namesForPosition(sunP,obs,names):[];
+      html+='<tr>';
+      if(row===0) html+='<td rowspan="3" class="weekGroup"><strong>'+(wi+1)+'</strong><span>'+shortDateOnly(monday)+' – '+shortDateOnly(fri)+'</span></td>';
+      html+='<td class="shiftNo">'+(shift===1?'I':shift===2?'II':'III')+'<br><span class="weekDate">'+(shift===1?'06:00–14:00':shift===2?'14:00–22:00':'22:00–06:00')+'</span></td>';
+      html+='<td class="names">'+(workNames.length?workNames.map(escapeHtml).join('<br>'):'<span class="emptyCell">—</span>')+'</td>';
+      html+='<td class="names"><span class="weekDate">'+shortDateOnly(sat)+'</span><br>'+(satNames.length?satNames.map(escapeHtml).join('<br>'):'<span class="emptyCell">—</span>')+'</td>';
+      html+='<td class="names"><span class="weekDate">'+shortDateOnly(sun)+'</span><br>'+(sunNames.length?sunNames.map(escapeHtml).join('<br>'):'<span class="emptyCell">—</span>')+'</td></tr>';
+    });
+  });
+  html+='</tbody></table><div class="paperFoot">*Od maja do sierpnia nie można przepracować ciągiem od piątku do czwartku.</div><div class="paperLegend"><b>Obsada:</b> maksymalnie 2 dyspozytorów na zmianę. Dni robocze obsadzamy raz na cały tydzień; weekend ustawiamy osobno.</div></div></div>';
+  return html;
+}
+async function viewGrafik(grafikId){
+  const box=$('adminGrafikView');box.classList.remove('hidden');box.innerHTML='<div class="loading">Ładowanie podglądu grafiku…</div>';
+  try{
+    const bundle=await fetchGrafikBundle(grafikId),g=bundle.grafik||bundle,positions=bundle.positions||[],obs=bundle.obsada||bundle.grafik_obsada||[];
+    box.innerHTML=renderPaperSchedule(g,positions,obs);box.scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){box.innerHTML='<div class="err">❌ Nie udało się wyświetlić grafiku.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}
+}
+async function editGrafik(grafikId){
+  try{
+    const bundle=await fetchGrafikBundle(grafikId),g=bundle.grafik||bundle,positions=bundle.positions||[];
+    $('genYear').value=g.rok;$('genMonth').value=g.miesiac;$('genName').value=g.nazwa||('Grafik '+months[g.miesiac-1]+' '+g.rok);
+    draftPositions=positions.map(p=>({...p,dyspozytor_ids:(bundle.obsada||bundle.grafik_obsada||[]).filter(o=>Number(o.pozycja_id)===Number(p.id)).map(o=>Number(o.dyspozytor_id))}));
+    window.editingGrafikId=Number(g.id);window.draftWeek=mondayOf(new Date(g.rok,g.miesiac-1,1));
+    $('previewCard').classList.remove('hidden');$('saveGrafikBtn').textContent='🔄 Aktualizuj grafik w Supabase';$('genMsg').innerHTML='<div class="ok">✏️ Edycja grafiku ID '+Number(g.id)+' — zmiany zapiszą się w istniejącym grafiku.</div>';
+    renderWeeklyPreview();$('previewCard').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){$('genMsg').innerHTML='<div class="err">Nie udało się otworzyć grafiku do edycji.<br><span class="small">'+escapeHtml(e.message)+'</span></div>'}
+}
+
+
+function initGenerator(){
+  const now=new Date();
+  $('genYear').value=now.getFullYear();
+  $('genMonth').innerHTML=months.map((x,i)=>'<option value="'+(i+1)+'">'+x+'</option>').join('');
+  $('genMonth').value=now.getMonth()+1;
+  $('genName').value='Grafik '+months[now.getMonth()]+' '+now.getFullYear();
+}
+function daysInMonth(y,m){return new Date(y,m,0).getDate()}
+function makePositions(y,m){
+  const out=[];
+  for(let day=1;day<=daysInMonth(y,m);day++){
+    const d=new Date(y,m-1,day),weekend=d.getDay()===0||d.getDay()===6;
+    const date=y+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    const shifts=weekend?[['1','06:00','18:00','12h'],['2','18:00','06:00','12h']]:[['1','06:00','14:00','8h'],['2','14:00','22:00','8h'],['3','22:00','06:00','8h']];
+    shifts.forEach(s=>out.push({data:date,godzina_od:s[1],godzina_do:s[2],typ:s[3],shift_no:s[0],dyspozytor_ids:[]}));
+  }
+  return out;
+}
+function mondayOf(date){
+  const d=new Date(date);d.setHours(0,0,0,0);
+  const day=d.getDay();d.setDate(d.getDate()+(day===0?-6:1-day));return d;
+}
+function isoDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function generatePreview(){
+  const y=Number($('genYear').value),m=Number($('genMonth').value);
+  if(!y||!m){$('genMsg').innerHTML='<div class="err">Podaj rok i miesiąc.</div>';return}
+  draftPositions=makePositions(y,m);
+  window.editingGrafikId=null;$('saveGrafikBtn').textContent='💾 Zapisz cały grafik w Supabase';
+  window.draftWeek=mondayOf(new Date(y,m-1,1));
+  renderWeeklyPreview();
+  $('previewCard').classList.remove('hidden');
+  $('genMsg').innerHTML='<div class="ok">✅ Wygenerowano '+draftPositions.length+' zmian. Układamy je teraz tygodniami.</div>';
+}
+function changeDraftWeek(delta){
+  if(!window.draftWeek)return;
+  window.draftWeek.setDate(window.draftWeek.getDate()+delta*7);
+  renderWeeklyPreview();
+}
+
+function weekDates(monday){
+  const days=[];
+  for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);days.push(d)}
+  return days;
+}
+function weekdayPositionsForWeek(){
+  const monday=window.draftWeek;
+  if(!monday)return [];
+  const start=isoDate(monday), endDate=new Date(monday); endDate.setDate(endDate.getDate()+6); const end=isoDate(endDate);
+  return draftPositions.filter(p=>{
+    const d=new Date(p.data+'T00:00:00'); const n=d.getDay();
+    return n>=1 && n<=5 && p.data>=start && p.data<=end;
+  });
+}
+function weekRowsForShift(shiftNo){return weekdayPositionsForWeek().filter(p=>String(p.shift_no)===String(shiftNo))}
+function getWeekShiftIds(shiftNo){
+  const rows=weekRowsForShift(shiftNo); if(!rows.length)return [];
+  const common=[]; dispatchers.forEach(d=>{const id=Number(d.id);if(rows.every(p=>(p.dyspozytor_ids||[]).map(Number).includes(id)))common.push(id)}); return common;
+}
+function usedOnOtherWeekShifts(shiftNo){
+  const used=new Set(); weekdayPositionsForWeek().forEach(p=>{if(String(p.shift_no)!==String(shiftNo))(p.dyspozytor_ids||[]).forEach(id=>used.add(Number(id)))}); return used;
+}
+function setWeekSlot(shiftNo,slot,id){
+  const rows=weekRowsForShift(shiftNo), n=Number(id)||0;
+  if(!rows.length)return;
+  if(n){
+    const other=usedOnOtherWeekShifts(shiftNo); if(other.has(n)){alert('Ten dyspozytor jest już przypisany do innej zmiany w tym tygodniu.');renderWeeklyPreview();return;}
+    const current=getWeekShiftIds(shiftNo).map(Number);
+    if(!current.includes(n) && current.length>=2){alert('Maksymalnie 2 dyspozytorów na zmianę.');renderWeeklyPreview();return;}
+    const next=current.filter(x=>x!==n); next[slot]=n;
+    rows.forEach(p=>p.dyspozytor_ids=next.filter(Boolean));
+  }else{
+    const current=getWeekShiftIds(shiftNo).map(Number); current[slot]=0; rows.forEach(p=>p.dyspozytor_ids=current.filter(Boolean));
+  }
+  renderWeeklyPreview();
+}
+function setWeekendSlot(idx,slot,id,date){
+  const p=draftPositions[idx], current=(p.dyspozytor_ids||[]).map(Number), n=Number(id)||0;
+  const used=new Set();draftPositions.forEach((x,i)=>{if(i!==idx&&x.data===date)(x.dyspozytor_ids||[]).forEach(v=>used.add(Number(v)))});
+  if(n&&used.has(n)){alert('Ten dyspozytor jest już przypisany do innej zmiany tego dnia.');renderWeeklyPreview();return;}
+  if(n&&current.filter(Boolean).length>=2&&!current.includes(n)){alert('Maksymalnie 2 dyspozytorów na zmianę.');renderWeeklyPreview();return;}
+  current[slot]=n;p.dyspozytor_ids=current.filter(Boolean);renderWeeklyPreview();
+}
+function personOptions(shiftNo,slot,selectedIds){
+  const other=usedOnOtherWeekShifts(shiftNo); const selected=Number(selectedIds[slot]||0);
+  return '<option value="">— puste —</option>'+dispatchers.map(d=>{const id=Number(d.id),blocked=other.has(id)&&id!==selected;return '<option value="'+id+'" '+(id===selected?'selected ':'')+(blocked?'disabled':'')+'>'+escapeHtml(d.imie_nazwa)+(blocked?' · zajęty':'')+'</option>'}).join('');
+}
+function weekendPersonOptions(idx,slot,date,selectedIds){
+  const selected=Number(selectedIds[slot]||0),used=new Set();draftPositions.forEach((x,i)=>{if(i!==idx&&x.data===date)(x.dyspozytor_ids||[]).forEach(v=>used.add(Number(v)))});
+  return '<option value="">— puste —</option>'+dispatchers.map(d=>{const id=Number(d.id),blocked=used.has(id)&&id!==selected;return '<option value="'+id+'" '+(id===selected?'selected ':'')+(blocked?'disabled':'')+'>'+escapeHtml(d.imie_nazwa)+(blocked?' · zajęty':'')+'</option>'}).join('');
+}
+function shiftRowHtml(shiftNo,from,to){
+  const ids=getWeekShiftIds(shiftNo); while(ids.length<2)ids.push(0);
+  return '<div class="shiftRow"><div class="shiftMeta"><b>Zmiana '+shiftNo+'</b><span>🕐 '+from+'–'+to+'</span><div class="summary">'+(ids.filter(Boolean).length?ids.filter(Boolean).map(id=>'<span class="crewPill">'+escapeHtml(dispatchers.find(d=>Number(d.id)===Number(id))?.imie_nazwa||'')+'</span>').join(''):'<span class="crewPill emptyPill">brak obsady</span>')+'</div></div><div class="slots">'+[0,1].map(slot=>'<div class="slot"><label>Miejsce '+(slot+1)+'</label><select class="weekSelect" data-shift="'+shiftNo+'" data-slot="'+slot+'">'+personOptions(shiftNo,slot,ids)+'</select></div>').join('')+'</div></div>';
+}
+function weekendShiftHtml(idx,p,date){const ids=(p.dyspozytor_ids||[]).map(Number);while(ids.length<2)ids.push(0);return '<div class="shiftRow"><div class="shiftMeta"><b>Zmiana '+escapeHtml(p.shift_no)+'</b><span>🕐 '+escapeHtml(p.godzina_od)+'–'+escapeHtml(p.godzina_do)+'</span><div class="summary">'+(ids.filter(Boolean).length?ids.filter(Boolean).map(id=>'<span class="crewPill">'+escapeHtml(dispatchers.find(d=>Number(d.id)===Number(id))?.imie_nazwa||'')+'</span>').join(''):'<span class="crewPill emptyPill">brak obsady</span>')+'</div></div><div class="slots">'+[0,1].map(slot=>'<div class="slot"><label>Miejsce '+(slot+1)+'</label><select class="weekendSelect" data-idx="'+idx+'" data-date="'+date+'" data-slot="'+slot+'">'+weekendPersonOptions(idx,slot,date,ids)+'</select></div>').join('')+'</div></div>'}
+function updateProgress(){
+  if(!draftPositions.length)return; const work=weekdayPositionsForWeek(); const workAssigned=new Set(work.flatMap(p=>p.dyspozytor_ids||[]).map(Number));
+  const weekends=draftPositions.filter(p=>{const d=new Date(p.data+'T00:00:00');return d.getDay()===0||d.getDay()===6}); const totalSlots=6+weekends.length*2, filled=workAssigned.size*2/3+weekends.reduce((a,p)=>a+(p.dyspozytor_ids||[]).length,0); const pct=Math.round(Math.min(100,(filled/totalSlots)*100));
+  $('progressBar').style.width=pct+'%';$('progressText').textContent=pct+'%';$('weekStatus').textContent=workAssigned.size+' dyspozytorów przypisanych do zmian roboczych · weekend osobno';
+}
+function renderWeeklyPreview(){
+  if(!draftPositions.length)return; const monday=window.draftWeek||mondayOf(new Date(draftPositions[0].data+'T00:00:00')),days=weekDates(monday); $('draftWeekLabel').textContent=formatDate(isoDate(days[0]))+' – '+formatDate(isoDate(days[6]));$('previewCount').textContent=draftPositions.length+' zmian';
+  let html='<div class="weekCard"><div class="weekHead">Poniedziałek – Piątek<small>'+formatDate(isoDate(days[0]))+' – '+formatDate(isoDate(days[4]))+'</small></div><div class="workBlock">';[['1','06:00','14:00'],['2','14:00','22:00'],['3','22:00','06:00']].forEach(s=>html+=shiftRowHtml(s[0],s[1],s[2]));html+='</div>';
+  [5,6].forEach(off=>{const d=days[off],date=isoDate(d),ps=draftPositions.map((p,i)=>({p,i})).filter(x=>x.p.data===date);html+='<div class="weekendTitle">'+weekdays[d.getDay()]+' <span class="dayMini">'+String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'</span></div>';ps.forEach(({p,i})=>html+=weekendShiftHtml(i,p,date));}); html+='</div>';$('preview').innerHTML=html;updateProgress();
+}
+$('preview').addEventListener('change',e=>{const el=e.target;if(el.classList.contains('weekSelect'))setWeekSlot(el.dataset.shift,Number(el.dataset.slot),el.value);if(el.classList.contains('weekendSelect'))setWeekendSlot(Number(el.dataset.idx),Number(el.dataset.slot),el.value,el.dataset.date)});
+async function saveGrafik(){
+  if(!draftPositions.length){$('saveMsg').innerHTML='<div class="err">Najpierw wygeneruj grafik.</div>';return}
+  const y=Number($('genYear').value),m=Number($('genMonth').value),name=$('genName').value.trim()||('Grafik '+months[m-1]+' '+y);
+  for(const p of draftPositions){
+    if((p.dyspozytor_ids||[]).length>2){$('saveMsg').innerHTML='<div class="err">Jedna zmiana może mieć maksymalnie 2 dyspozytorów.</div>';return}
+  }
+  $('saveGrafikBtn').disabled=true;$('saveMsg').innerHTML='<div class="info">💾 Zapisywanie całego grafiku…</div>';
+  try{
+    const payload=draftPositions.map(p=>({data:p.data,godzina_od:p.godzina_od,godzina_do:p.godzina_do,typ:p.typ,dyspozytor_ids:p.dyspozytor_ids||[]}));
+    const result=await rpc('tsg_upsert_grafik',{p_grafik_id:window.editingGrafikId||null,p_rok:y,p_miesiac:m,p_nazwa:name,p_positions:payload});
+    window.editingGrafikId=Number(result?.id??result?.grafik_id??window.editingGrafikId)||null;$('saveGrafikBtn').textContent='🔄 Aktualizuj grafik w Supabase';$('saveMsg').innerHTML='<div class="ok">✅ Grafik zapisany/aktualizowany. ID: '+escapeHtml(result?.id??result?.grafik_id??'OK')+'</div>';
+    await loadAdminGrafiki();currentMonth=new Date(y,m-1,1);
+  }catch(e){
+    $('saveMsg').innerHTML='<div class="err">❌ Nie udało się zapisać grafiku.<br><span class="small">'+escapeHtml(e.message)+'</span></div>';
+  }finally{$('saveGrafikBtn').disabled=false}
+}
+function renderSavedCalendar(rows){
+  const g={nazwa:currentGrafikName||'Grafik',rok:currentGrafikYear||new Date().getFullYear(),miesiac:currentGrafikMonth||new Date().getMonth()+1,status:currentGrafikStatus||'roboczy',id:window.editingGrafikId||0};
+  $('savedCalendar').innerHTML=renderPaperSchedule(g,rows||[],window.savedObsada||[]);
+}
+
+function logout(){me=null;$('app').classList.add('hidden');$('nav').classList.add('hidden');$('pin').value='';showLogin()}(function init(){try{const saved=localStorage.getItem('tsg_cfg');if(saved)cfg=JSON.parse(saved)}catch(e){}if(cfg&&cfg.url&&cfg.key)showLogin();else $('setup').classList.remove('hidden')})();
+</script></body></html>
